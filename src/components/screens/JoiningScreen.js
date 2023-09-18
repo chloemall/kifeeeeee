@@ -26,6 +26,9 @@ export function JoiningScreen({
   setMicOn,
   setMeetingMode,
   meetingMode,
+  viewerJoiningId, 
+  codes,
+  boo
 }) {
   const [setting, setSetting] = useState("video");
   const [{ webcams, mics }, setDevices] = useState({
@@ -367,7 +370,7 @@ export function JoiningScreen({
                             {!webcamOn ? (
                               <p className="text-xl xl:text-lg 2xl:text-xl text-white">
                                 {meetingMode === Constants.modes.VIEWER
-                                  ? "You are not permitted to use your microphone and camera."
+                                  ? `You are not permitted to use your microphone and camera.`
                                   : "The camera is off"}
                               </p>
                             ) : null}
@@ -446,6 +449,9 @@ export function JoiningScreen({
                     setVideoTrack={setVideoTrack}
                     setMeetingMode={setMeetingMode}
                     meetingMode={meetingMode}
+                    codes={codes}
+                    boo={boo}
+
                     onClickStartMeeting={onClickStartMeeting}
                     onClickJoin={async (id) => {
                       const token = await getToken();

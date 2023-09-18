@@ -4,10 +4,50 @@ import { LeaveScreen } from "./components/screens/LeaveScreen";
 import { JoiningScreen } from "./components/screens/JoiningScreen";
 import { ILSContainer } from "./interactive-live-streaming/ILSContainer";
 import { MeetingAppProvider } from "./MeetingAppContextDef";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import Hello from "./components/Hello";
+import Main from "./Main";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "./firebase";
 const App = () => {
+  const [iscreateMeetingClicked, setIscreateMeetingClicked] = useState(false);
+const [isJoinMeetingClicked, setIsJoinMeetingClicked] = useState(false);
+  const [latestMeetingTimestamp, setLatestMeetingTimestamp] = useState(null); // State variable to store the timestamp of the latest meeting
+  const [studioCode, setStudioCode] = useState("");
+  const [bool, setBool] = useState(Boolean);
+console.log('jjfgjhgj',studioCode);
   const [token, setToken] = useState("");
+  console.log('peter',token);
   const [meetingId, setMeetingId] = useState("");
+  console.log('peter',meetingId);
+  useEffect(() => {
+    // Function to fetch the latest meeting code from Firestore.
+    const fetchLatestMeetingCode = async () => {
+      const meetingCodesRef = collection(db, "codes");
+      const q = query(meetingCodesRef, orderBy("createdAt", "desc"), limit(1));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const latestData = querySnapshot.docs[0].data();
+        setStudioCode(latestData.code);
+        setBool(latestData.status);
+        setLatestMeetingTimestamp(latestData.createdAt.toDate());
+      }
+    };
+
+    if (isJoinMeetingClicked) {
+      fetchLatestMeetingCode();
+    }
+  }, [isJoinMeetingClicked]);
+
+
   const [participantName, setParticipantName] = useState("");
   const [micOn, setMicOn] = useState(false);
   const [webcamOn, setWebcamOn] = useState(true);
@@ -32,9 +72,15 @@ const App = () => {
       };
     }
   }, [isMobile]);
+  const link =`${window.location.origin}`
 
   return (
     <>
+   <BrowserRouter>
+   <Routes>
+    <Route path={`${meetingId}`} element={<Main/>}/>
+   </Routes>
+   </BrowserRouter>
       {isMeetingStarted ? (
         <MeetingAppProvider
           selectedMic={selectedMic}
@@ -92,6 +138,8 @@ const App = () => {
           setSelectedMic={setSelectedMic}
           setSelectedWebcam={setSelectedWebcam}
           setWebcamOn={setWebcamOn}
+          codes={studioCode}
+          boo={bool}
           onClickStartMeeting={() => {
             setMeetingStarted(true);
           }}
