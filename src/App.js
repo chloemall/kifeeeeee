@@ -77,10 +77,8 @@ console.log('jjfgjhgj',studioCode);
   return (
     <>
    <BrowserRouter>
-   <Routes>
-    <Route path={`${meetingId}`} element={<Main/>}/>
-   </Routes>
-   </BrowserRouter>
+   
+  
       {isMeetingStarted ? (
         <MeetingAppProvider
           selectedMic={selectedMic}
@@ -101,27 +99,32 @@ console.log('jjfgjhgj',studioCode);
             reinitialiseMeetingOnConfigChange={true}
             joinWithoutUserInteraction={true}
           >
-            <ILSContainer
-              onMeetingLeave={() => {
-                setToken("");
-                setMeetingId("");
-                setParticipantName("");
-                setWebcamOn(false);
-                setMicOn(false);
-                setMeetingStarted(false);
-              }}
-              setIsMeetingLeft={setIsMeetingLeft}
-              selectedMic={selectedMic}
-              selectedWebcam={selectedWebcam}
-              selectWebcamDeviceId={selectWebcamDeviceId}
-              setSelectWebcamDeviceId={setSelectWebcamDeviceId}
-              selectMicDeviceId={selectMicDeviceId}
-              setSelectMicDeviceId={setSelectMicDeviceId}
-              micEnabled={micOn}
-              webcamEnabled={webcamOn}
-              meetingMode={meetingMode}
-              setMeetingMode={setMeetingMode}
-            />
+            <Routes>
+    <Route path={`/:id`} element={
+      <ILSContainer
+      onMeetingLeave={() => {
+        setToken("");
+        setMeetingId("");
+        setParticipantName("");
+        setWebcamOn(false);
+        setMicOn(false);
+        setMeetingStarted(false);
+      }}
+      setIsMeetingLeft={setIsMeetingLeft}
+      selectedMic={selectedMic}
+      selectedWebcam={selectedWebcam}
+      selectWebcamDeviceId={selectWebcamDeviceId}
+      setSelectWebcamDeviceId={setSelectWebcamDeviceId}
+      selectMicDeviceId={selectMicDeviceId}
+      setSelectMicDeviceId={setSelectMicDeviceId}
+      micEnabled={micOn}
+      webcamEnabled={webcamOn}
+      meetingMode={meetingMode}
+      setMeetingMode={setMeetingMode}
+    />
+    }/>
+   </Routes>
+            
           </MeetingProvider>
         </MeetingAppProvider>
       ) : isMeetingLeft ? (
@@ -148,7 +151,7 @@ console.log('jjfgjhgj',studioCode);
           meetingMode={meetingMode}
           setMeetingMode={setMeetingMode}
         />
-      )}
+      )} </BrowserRouter>
     </>
   );
 };

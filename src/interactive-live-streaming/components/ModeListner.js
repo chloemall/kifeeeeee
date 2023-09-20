@@ -100,7 +100,7 @@ const ModeListner = ({ setMeetingMode, meetingMode }) => {
       onMessageReceived: (data) => {
         if (data.message.senderId === participantRef.current.participant.id) {
           new Audio(
-            `https://static.videosdk.live/prebuilt/notification.mp3`
+            `https://static.videosdk.live/prebuilt/notif[[ication.mp3`
           ).play();
 
           toast(

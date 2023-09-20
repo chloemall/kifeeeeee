@@ -155,27 +155,27 @@ export function TopBar({ topBarHeight }) {
         tooltipTitle={
           hlsState === Constants.hlsEvents.HLS_STARTED ||
           hlsState === Constants.hlsEvents.HLS_PLAYABLE
-            ? "Stop HLS"
+            ? "Stop Streaming"
             : hlsState === Constants.hlsEvents.HLS_STARTING
-            ? "Starting HLS"
+            ? "Starting Streaming"
             : hlsState === Constants.hlsEvents.HLS_STOPPED
-            ? "Start HLS"
+            ? "Start Streaming"
             : hlsState === Constants.hlsEvents.HLS_STOPPING
-            ? "Stopping HLS"
-            : "Start HLS"
+            ? "Stopping Streaming"
+            : "Start Streaming"
         }
         Icon={LiveIcon}
         buttonText={
           hlsState === Constants.hlsEvents.HLS_STARTED ||
           hlsState === Constants.hlsEvents.HLS_PLAYABLE
-            ? "Stop HLS"
+            ? "Stop Streaming"
             : hlsState === Constants.hlsEvents.HLS_STARTING
-            ? "Starting HLS"
+            ? "Starting Streaming"
             : hlsState === Constants.hlsEvents.HLS_STOPPED
-            ? "Start HLS"
+            ? "Start Streaming"
             : hlsState === Constants.hlsEvents.HLS_STOPPING
-            ? "Stopping HLS"
-            : "Start HLS"
+            ? "Stopping Streaming"
+            : "Start Streaming"
         }
         isFocused={isHls}
         lottieOption={isHls ? defaultOptions : null}
@@ -187,26 +187,26 @@ export function TopBar({ topBarHeight }) {
         tooltipTitle={
           hlsState === Constants.hlsEvents.HLS_STARTED ||
           hlsState === Constants.hlsEvents.HLS_PLAYABLE
-            ? "Stop HLS"
+            ? "Stop Streaming"
             : hlsState === Constants.hlsEvents.HLS_STARTING
-            ? "Starting HLS"
+            ? "Starting Streaming"
             : hlsState === Constants.hlsEvents.HLS_STOPPED
-            ? "Start HLS"
+            ? "Start Streaming"
             : hlsState === Constants.hlsEvents.HLS_STOPPING
-            ? "Stopping HLS"
-            : "Start HLS"
+            ? "Stopping Streaming"
+            : "Start Streaming"
         }
         buttonText={
           hlsState === Constants.hlsEvents.HLS_STARTED ||
           hlsState === Constants.hlsEvents.HLS_PLAYABLE
-            ? "Stop HLS"
+            ? "Stop Streaming"
             : hlsState === Constants.hlsEvents.HLS_STARTING
-            ? "Starting HLS"
+            ? "Starting Streaming"
             : hlsState === Constants.hlsEvents.HLS_STOPPED
-            ? "Start HLS"
+            ? "Start Streaming"
             : hlsState === Constants.hlsEvents.HLS_STOPPING
-            ? "Stopping HLS"
-            : "Start HLS"
+            ? "Stopping Streaming"
+            : "Start Streaming"
         }
         lottieOption={isHls ? defaultOptions : null}
         isRequestProcessing={isRequestProcessing}

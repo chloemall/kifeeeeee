@@ -10,6 +10,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { Link } from "react-router-dom";
 
 export function MeetingDetailsScreen({
   onClickJoin,
@@ -25,6 +26,7 @@ export function MeetingDetailsScreen({
   boo
 }) {
   const [studioCode1, setStudioCode1] = useState("");
+  const [studioCode12, setStudioCode12] = useState("");
   const [studioCodeError, setStudioCodeError] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [iscreateMeetingClicked, setIscreateMeetingClicked] = useState(false);
@@ -119,7 +121,7 @@ export function MeetingDetailsScreen({
           {meetingMode === Constants.modes.CONFERENCE ? (
             <>
               <input
-                defaultValue={studioCode}
+                // defaultValue={studioCode}
                 onChange={(e) => {
                   setStudioCode(e.target.value);
                 }}
@@ -157,6 +159,8 @@ export function MeetingDetailsScreen({
             placeholder="Enter your name"
             className="px-4 py-3 mt-5 bg-gray-650 rounded-xl text-black w-full text-center"
           />
+              <Link to={`${studioCode}`}> 
+
           <button
             disabled={participantName.length < 3}
             className={`w-full ${
@@ -185,29 +189,33 @@ export function MeetingDetailsScreen({
                 meetingMode === Constants.modes.CONFERENCE
               ? "Join Studio"
               : "Join Streaming Room"}
-          </button>
+          </button></Link>
         </>
       )}
       {!iscreateMeetingClicked && !isJoinMeetingClicked && (
         <div className="w-full md:mt-0 mt-4 flex flex-col">
           <div className="flex items-center justify-center flex-col w-full">
-            { !studioCode ? (
+            {/* { !studioCode ? ( */}
               <>
+
                 <button
                   className="w-full bg-purple-350 text-white px-2 py-3 rounded-xl"
                   onClick={async (e) => {
                     const studioCode = await _handleOnCreateMeeting();
+                    const studioCodess = await _handleOnCreateMeeting();
                     setStudioCode(studioCode);
+                    setStudioCode12(studioCodess)
                     //  setBool(false)
                     setIscreateMeetingClicked(true);
                     setMeetingMode(Constants.modes.CONFERENCE);
                     await saveMeetingCodeToFirestore(studioCode);
                   }}
                 >
-                  Create a meeting{latestMeetingCode}
+                  Create a meeting
                 </button>
+               
               </>
-            ) : (
+            {/* ) : ( */}
               <>
                 <button
                   className="w-full bg-purple-350 text-white px-2 py-3 mt-5 rounded-xl"
@@ -219,6 +227,7 @@ export function MeetingDetailsScreen({
                 >
                   Join as a Guest
                 </button>
+                <Link to={`${studioCode}`}>
                 <button
                   className="w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5"
                   onClick={(e) => {
@@ -226,10 +235,11 @@ export function MeetingDetailsScreen({
                     setMeetingMode(Constants.modes.VIEWER);
                   }}
                 >
-                  Join as a Viewer
+                  Join as a Viewer        
                 </button>
+                </Link>
               </>
-            )}
+            {/* )} */}
           </div>
         </div>
       )}
